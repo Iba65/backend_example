@@ -1,4 +1,4 @@
-# Primeros pasos
+## Primeros pasos
 
 En la carpeta principal del proyecto creamos un archivo de entrada a nuestra aplicación con el nombre **_index.js_**
 
@@ -16,4 +16,128 @@ function requestController() {
 const server = http.createServer(requestController);
 
 server.listen(4000);
+```
+
+## Preconfiguración para Git
+
+Un repositorio es un alojamiento en la nuve de nuestro codigo para el tratamiento de versiones. Github nos da un servicio de alojamiento y gestion de versionado para nuestro proyecto. De tal manera que segun el cambio que se efectue se indicara una versión distinta.
+
+El versionado gestiona tres niveles **_1.0.0_**. De tal modo que ante los cambios menores se aumenta la el numero de la version de la derecha. Un cambio mayor se aumenta la vesion del centro, que vendria a ser la **minor** del proyecto, y ante un cambio importante se aumenta la versión de la izquierda, que vendria a ser la **mayor** del proyecto.
+
+Pasos a seguir:
+
+- primero inicializamos git:
+
+```
+  git init
+```
+
+- seguido añadimos los archivos de nuestro proyecto al gestor para que podamos "commitearlos":
+
+```
+  git add .
+```
+
+- y por ultimo los "commiteamos" para su posterior subida al repositorio:
+
+```
+  git commit -m "primer commit"
+```
+
+Vamos a explicar brevemente que hemos hecho:
+
+Cada vez que cambiamos un archivo de nuestro codigo en la maquina de trabajo o del lado del desarrollador, tambien llamado **\*local**, necesitamos subir este cambio al repositodiro o "almacen" de nuestro código.
+
+Pero no siempre voy a subir, o no necesariamente puedo querer subir todos los cambios, por lo que tengo que indicar que quiero subir al repositorio por medio del comando **_git add_** y seguido el nombre o la lista de los archivos que voy a subir. Si deseo subir todos los cambios usaria **_git add ._**.
+
+Seguidamente tengo que preparar los archivos que he indicado para subirlos al repositorio. Para ello realizare un _commit_ usando el comando **_git commit_** Pero ademas, si quiero incluir un comentario para indicar porque hago esta subida al repositorio necesito añadir **_-m "comantario"_**, quedando el codigo que tengo que usar como se indica arriba. Cabe destacar que puedo "acumular" tantos commits como desee. pero por seguridad siempre es mejor acumular pocos o uno.
+
+Por ultimo necesito subir todo al repositorio. Para ello utilizare un el comando **_git push_**. Es importante que tenga el repositorio creado en github para poder hacer este ultimo paso.
+
+## Inicializar el proyecto
+
+Una vez establecida las conexiones a git necesitamos inicializar el proyecto. Hasta ahora solo tenemos el archivo index.js que es nuestro archivo de entrada, pero realmente no tenemos definido el proyecto. Por eso necesitamos ejecutar la inicialización del proyecto con un instalador de paquetes que puede ser **_npm_** o **_yarn_**.
+
+Si tenemos intalado **_node js_** podremos utilizar el comando para inicializar el proyecto con npm:
+
+```
+  npm init
+```
+
+y seguido:
+
+```
+  npm install
+```
+
+O si tenemos instalado **_yarn_** podremos utilizar el comando para inicializar el proyecto con yarn:
+
+```
+  yarn init
+```
+
+Este instalador nos pedira la siguiente información
+
+```
+question name (testdir): nombre de la aplicacion. (Podemos tomar el por defecto)
+question version (1.0.0): versión inicial. (dejamos el por defecto)
+question description: descripcion de que hace nuestro proyecto. (si se desea)
+question entry point (index.js): archivo de inicio de la aplicación. (generalmente sera index.js o app.js)
+question git repository: url del repositorio de git donde vamos a guardarlo. (No es necesario indicarlo ahora)
+question author: El nombre del autor.
+question license (MIT): (no se inidica)
+question private: false (nuestro proyecto es publico, no privado.)
+```
+
+- Si no tenemos instalado **_yarn_** debemos instalarlo con el comando:
+
+```
+  npm install --global yarn
+```
+
+Estos instaladores lo que hacen es crearnos el archivo **package.json**, con las dependencias y la información de nuestro proyecto. Y la carpeta de dependencias node_modules, donde estan todas las librerias y dependencias bases que necesita nuestro proyecto.
+
+## Dependencia **_nodemon_**
+
+Otra instalación que vamos a realizar es la de una dependencia que nos va a permitir tener nuestro servidor activo y a la escucha. Esto se realiza para que cuando hagamos un cambio sobre el código de la aplicación y tengamos el servidor en marcha no tengamos que reinicializar el servidor para que tome los nuevos cambios.
+
+El nombre de paquete es **_nodemon_** y se instala con el comando:
+
+```
+  yarn add nodemon -D
+```
+
+## Creación y configuración del repositorio
+
+En primer lugar si no tenemos cuenta en Github debemos de crearla, y si la tenemos ingresaremos en la cuenta que tegamos creada. Parea ello pinchamos en la opción de **New repository** en la barra de menu donde vemos un + :
+
+En el formulario rellenaremos varios campos:
+
+- nombre del repositorio: generalmente el nombre del proyecto
+- descripcion: la que deseemos
+- seleccionar el repositorio como publico o privado: seleccionaremos publico.
+
+Y seguido pinchamos en crear repositorio.
+
+Esto creara el repositorio y nos llevara a una pantalla donde nos dice los pasos que tenemos que hacer para relacionar el repositorio crado con el proyecto de vsc.
+![como unir el respositorio con el proyecto](image.png)
+
+#### Explicación de los comandos de la imagen
+
+- git init -> Inicializa git para conectarlo con la vsc
+- git add README.md -> Crea un archivo Readme.md en el proyecto que se mostrara cuando se visite la pestaña de código del repositorio.
+- git commit -m "first commit" -> De no haberse hecho ninguno cra el primer commit para subir los archivos iniciales en la creación del proyecto.
+- git branch -M main -> Renombra la rama y/o agraga la rama main (principal) al repositorio.
+  Hasta aqui ya se hicieron los pasos necesarios en la explicación incial de este archivo.
+- git remote add origin https://github.com/Iba65/backend_example.git -> Agrega a repositorio de git la referencia a un determinado repositorio remoto que es el repositorio donde queremos que se suban los archivos
+- git push -u origin main -> Este comando subiria a la rama main lo tubieramos "commiteado". (No vamos a hacerlo aun.)
+
+## Ignorando elementos para las subidas
+
+Hay o puede haber archivos o carpetas que no queremos subir al repositorio, principalmente por que no son necesarios y/o por que ademas pesan mucho (sea el caso de la carpeta node*modules). Para ello crearemos una archivo llamda \*\**.gitignore\_** para indicar que cosas no tiene que subirse al repositorio cuando hagamos un **push\*\*.
+
+Estableceremos la siguiente configuración en nuestro **.gitignore**:
+
+```js
+
 ```
