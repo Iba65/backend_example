@@ -134,10 +134,20 @@ Esto creara el repositorio y nos llevara a una pantalla donde nos dice los pasos
 
 ## Ignorando elementos para las subidas
 
-Hay o puede haber archivos o carpetas que no queremos subir al repositorio, principalmente por que no son necesarios y/o por que ademas pesan mucho (sea el caso de la carpeta node*modules). Para ello crearemos una archivo llamda \*\**.gitignore\_** para indicar que cosas no tiene que subirse al repositorio cuando hagamos un **push\*\*.
+Hay o puede haber archivos o carpetas que no queremos subir al repositorio, principalmente por que no son necesarios y/o por que ademas pesan mucho (sea el caso de la carpeta node\*modules). Para ello crearemos una archivo llamda \*\*\*.gitignore\_** para indicar que cosas no tiene que subirse al repositorio cuando hagamos un **push\*\*.
 
 Estableceremos la siguiente configuración en nuestro **.gitignore**:
 
 ```js
+/node_modules
+/public
 
+.gitignore
 ```
+
+Seguidamente seguimos con la subida de archivos:
+
+- git status -> Este archivo nos mostrara en rojo los archivos que hay que indicar que queremos "commitear" y en verde los que ya esten incluidos para el siguiente commit.
+- git add . -> Ahora le indicamos con el **_._** que nos incluya todo lo que este pendiente
+- git commit -m "actualización del codigo" -> y comiteamos lo guardado para commitear
+- git push -u origin master -> Con este comando indicamos que lo suba al repositorio.
