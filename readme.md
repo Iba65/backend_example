@@ -238,4 +238,5 @@ y lo rellenamos..
 - comando del build: dejamos el que indique
 - comando de ejecucion de proyecto: yarn start
 
-pinchamos en "crear webservices" y empezara el proceso de construccion y ejecución de la aplicacion
+pinchamos en "crear webservices" y empezara el proceso de construccion y ejecución de la aplicacion:
+![ejecucion en render](image-9.png)
