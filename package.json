@@ -6,7 +6,8 @@
   "author": "Ignacio Ballester <front.developer.iba@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "private": false,
   "devDependencies": {

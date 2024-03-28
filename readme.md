@@ -150,4 +150,4 @@ Seguidamente seguimos con la subida de archivos:
 - git status -> Este archivo nos mostrara en rojo los archivos que hay que indicar que queremos "commitear" y en verde los que ya esten incluidos para el siguiente commit.
 - git add . -> Ahora le indicamos con el **_._** que nos incluya todo lo que este pendiente
 - git commit -m "actualización del codigo" -> y comiteamos lo guardado para commitear
-- git push -u origin master -> Con este comando indicamos que lo suba al repositorio.
+- git push -u origin master -> Con este comando indicamos que lo suba al repositorio. El flag -u indica que los siguientes push que vamos a realizar se van a realizar sobre la rama que hemos indicado en esta subida.
