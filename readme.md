@@ -151,3 +151,91 @@ Seguidamente seguimos con la subida de archivos:
 - git add . -> Ahora le indicamos con el **_._** que nos incluya todo lo que este pendiente
 - git commit -m "actualización del codigo" -> y comiteamos lo guardado para commitear
 - git push -u origin master -> Con este comando indicamos que lo suba al repositorio. El flag -u indica que los siguientes push que vamos a realizar se van a realizar sobre la rama que hemos indicado en esta subida.
+
+## Preparando la apliación para la subida al servidor
+
+Ahora lo que vamos ha hacer son algunos cambios sobre el codigo de nuestro proyecto para que cuando lo subamos a **_RENDER_** nuestro proyecto se pueda desplegar correctamente.
+
+### Incluimos es script start
+
+Primero vamos a incluir el el archivo **package.json** es script **start** para que cuando se lance la aplicación en el servidor pueda ejecutar dicho comando y asi ponerla en marcha.
+
+Nuestro elemento **scripts** quedara de la siguiente forma:
+
+```js
+"scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+```
+
+### Agregamos la variable de entorno para el puerto del servidor
+
+Cuando ejecutamos una aplicación de backend en un servidor remoto esta tiene que comunicarse con la plicación del frontend atraves de un puerto. Pero, aunque en local le indicamos un puerto fijo, en el servidor remoto no podemos indicarle que va a terner un puerto fijo, sino que sera el que le asigne el servidor remoto.
+
+Seguiremos los siguientes pasos:
+
+1. Intalamos la libreria de dependencia dotenv,
+
+```js
+  yarn add dotenv -D
+```
+
+2. Crear un archivo de variables de entorno con el nombre **_.env_** en la raiz de nuestro proyecto. Este archivo hay que incluirlo en el archivo **.gitignore** ya que no queremos que suba al servidor al tener información sensible. Tendra el siguiente contenido:
+
+```js
+PORT = 4000;
+```
+
+3. Configurar dotenv. Para ello incluimos las siguientes lineas en las primeras lineas de nuestro archivo index.js:
+
+```js
+const dotenv = require("dotenv");
+dotenv.config();
+```
+
+4. Cambiamos la linea del **listen** de nuestro **index.js**, e incluimos el puerto de la variable de entorno:
+
+```js
+const PORT = process.env.PORT;
+server.listen(PORT, function () {
+  console.log("Aplicaciíon corriendo en puerto: " + PORT);
+});
+```
+
+## Crear una cuenta en **RENDER** o entrar en la cuenta creada:
+
+Si creamos una cuenta contestamos las preguntas iniciales y validamos el correo electronico. Depues entraremos en GET STARTED para indicar que servicio deseamos:
+![Get started in minutes](image-1.png)
+
+Escogemos new web services y nos saldrá la siguiente pantalla:
+![enlazar repositorio son servicio](image-2.png)
+
+Pulsamos **next** y salta la siguiente pantalla:
+![contectar](image-3.png)
+En esta pantalla podemos conectar con el repositorio a traves de los botones de "conectar repositorio" o podemos pegar la url del repositorio de github en "public GIT repository"
+
+a. Conectar con la cuenta github:
+Autorizamos a render a conectarse con la cuenta github:
+![autorizar a render](image-4.png)
+Luego nos logueamos a la cuenta de github
+![loguearse a la cuenta de github](image-5.png)
+
+b. Conectar con una url:
+Cogemos la url de nuestro proyecto:
+![url proyecto](image-6.png)
+la pegamos en la parte de Repositorio publico
+![repositorio publico](image-7.png)
+una vez hecho nos sale la siguiente pantalla:
+![formulario configuración](image-8.png)
+y lo rellenamos..
+
+- Nombre del servicio: nombre del proyecto.
+- Region donde va a estar alojado: escojemos ohio
+- Rama: Rama principal del projecto (seria master o main)
+- Root Directory: lo que ponga
+- Runtime: detecta que es node
+- comando del build: dejamos el que indique
+- comando de ejecucion de proyecto: yarn start
+
+pinchamos en "crear webservices" y empezara el proceso de construccion y ejecución de la aplicacion
